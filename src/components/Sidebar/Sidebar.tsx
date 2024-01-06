@@ -56,8 +56,24 @@ const Sidebar = () => {
         splits.map((split, i) => (
           <SubMenu key={`split_submenu_${i}`} title={split.splitName}>
             <MenuItem>
-              <NavLink to={`/split/${split.splitName}/ALL`} />
+              <NavLink to={`/split/${split.splitName}/all`} />
               <Typography>ALL</Typography>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={`/split/${split.splitName}/prices`} />
+              <Typography>Prices</Typography>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={`/split/${split.splitName}/fabrics`} />
+              <Typography>Fabrics</Typography>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={`/split/${split.splitName}/colors`} />
+              <Typography>Colors</Typography>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to={`/split/${split.splitName}/products`} />
+              <Typography>Products</Typography>
             </MenuItem>
             {split.label.map((label, j) => {
               const splitName = split.splitName.replace(/\//g, '-');

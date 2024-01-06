@@ -43,26 +43,44 @@ const ProductPage = () => {
   const [genders, setGenders] = useState<string[]>(localGenders);
   const [items, setItems] = useState<string[]>(splitName ? [] : [item]);
 
+  useEffect(() => {
+    setBrand(brandList[0]);
+  }, [brandList]);
   const handleChange = (event: SelectChangeEvent) => {
     setBrand(event.target.value as string);
   };
 
-  const label = useMemo(() => {
-    const label = splits
-      .find((split) => split.splitName == splitName)
-      ?.label.find((label) => label.labelName == labelName);
+  const keywords = useMemo(() => {
+    if (labelName) {
+      const label = splits
+        .find((split) => split.splitName == splitName)
+        ?.label.find((label) => label.labelName == labelName);
 
-    if (label) {
-      const { includeKeywords, excludeKeywords } = label;
-      return { includeKeywords, excludeKeywords };
+      if (label) {
+        const { includeKeywords, excludeKeywords } = label;
+        return { includeKeywords, excludeKeywords };
+      }
     }
 
-    return null;
-  }, [splits, splitName, labelName]);
+    const includeKeywords = splits
+      .map((split) => split.label.map(({ includeKeywords }) => includeKeywords))
+      .flat()
+      .flat();
+
+    const excludeKeywords = splits
+      .map((split) => split.label.map(({ excludeKeywords }) => excludeKeywords))
+      .flat()
+      .flat();
+
+    return {
+      includeKeywords,
+      excludeKeywords,
+    };
+  }, [splits, splitName, labelName, items]);
 
   const productData = useProductQuery({
     brand,
-    keywords: label ? items.concat(label.includeKeywords) : items,
+    keywords: keywords.includeKeywords.concat(items),
     index,
     show,
     dates: [localPeriod.startDate, localPeriod.endDate],

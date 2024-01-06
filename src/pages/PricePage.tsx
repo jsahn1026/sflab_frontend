@@ -47,18 +47,33 @@ const PricePage = () => {
     [brandList, brands]
   );
 
-  const label = useMemo(() => {
-    const label = splits
-      .find((split) => split.splitName == splitName)
-      ?.label.find((label) => label.labelName == labelName);
+  const keywords = useMemo(() => {
+    if (labelName) {
+      const label = splits
+        .find((split) => split.splitName == splitName)
+        ?.label.find((label) => label.labelName == labelName);
 
-    if (label) {
-      const { includeKeywords, excludeKeywords } = label;
-      return { includeKeywords, excludeKeywords };
+      if (label) {
+        const { includeKeywords, excludeKeywords } = label;
+        return { includeKeywords, excludeKeywords };
+      }
     }
 
-    return null;
-  }, [splits, splitName, labelName]);
+    const includeKeywords = splits
+      .map((split) => split.label.map(({ includeKeywords }) => includeKeywords))
+      .flat()
+      .flat();
+
+    const excludeKeywords = splits
+      .map((split) => split.label.map(({ excludeKeywords }) => excludeKeywords))
+      .flat()
+      .flat();
+
+    return {
+      includeKeywords,
+      excludeKeywords,
+    };
+  }, [splits, splitName, labelName, items]);
 
   useEffect(() => {
     setItems(splitName ? [] : [item]);
@@ -68,8 +83,8 @@ const PricePage = () => {
   }, [item]);
 
   const prices = usePricesQuery({
-    keywords: label ? items.concat(label.includeKeywords) : items,
-    ex_keywords: label ? label.excludeKeywords : [],
+    keywords: keywords.includeKeywords.concat(items),
+    ex_keywords: keywords.excludeKeywords.concat(items),
     brands,
     period,
     genders,

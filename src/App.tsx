@@ -43,6 +43,12 @@ function App() {
           <Route path="/colors/:item" element={<ColorPage />} />
           <Route path="/products/:item" element={<ProductPage />} />
 
+          <Route path="/split/:splitName/all" element={<ProductPage />} />
+          <Route path="/split/:splitName/prices" element={<PricePage />} />
+          <Route path="/split/:splitName/fabrics" element={<FabricPage />} />
+          <Route path="/split/:splitName/colors" element={<ColorPage />} />
+          <Route path="/split/:splitName/products" element={<ProductPage />} />
+
           <Route
             path="/split/prices/:splitName/:labelName"
             element={<PricePage />}
