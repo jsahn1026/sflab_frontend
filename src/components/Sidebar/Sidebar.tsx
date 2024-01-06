@@ -55,26 +55,25 @@ const Sidebar = () => {
       .concat(
         splits.map((split, i) => (
           <SubMenu key={`split_submenu_${i}`} title={split.splitName}>
-            <MenuItem>
-              <NavLink to={`/split/${split.splitName}/all`} />
-              <Typography>ALL</Typography>
-            </MenuItem>
-            <MenuItem>
-              <NavLink to={`/split/${split.splitName}/prices`} />
-              <Typography>Prices</Typography>
-            </MenuItem>
-            <MenuItem>
-              <NavLink to={`/split/${split.splitName}/fabrics`} />
-              <Typography>Fabrics</Typography>
-            </MenuItem>
-            <MenuItem>
-              <NavLink to={`/split/${split.splitName}/colors`} />
-              <Typography>Colors</Typography>
-            </MenuItem>
-            <MenuItem>
-              <NavLink to={`/split/${split.splitName}/products`} />
-              <Typography>Products</Typography>
-            </MenuItem>
+            <SubMenu key={`split_submenu_all_${i}`} title="ALL">
+              <MenuItem>
+                <NavLink to={`/split/${split.splitName}/prices`} />
+                <Typography>Prices</Typography>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to={`/split/${split.splitName}/fabrics`} />
+                <Typography>Fabrics</Typography>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to={`/split/${split.splitName}/colors`} />
+                <Typography>Colors</Typography>
+              </MenuItem>
+              <MenuItem>
+                <NavLink to={`/split/${split.splitName}/products`} />
+                <Typography>Products</Typography>
+              </MenuItem>
+            </SubMenu>
+
             {split.label.map((label, j) => {
               const splitName = split.splitName.replace(/\//g, '-');
               const labelName = label.labelName.replace(/\//g, '-');
