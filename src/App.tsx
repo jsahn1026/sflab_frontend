@@ -56,7 +56,7 @@ function App() {
             element={<ColorPage />}
           />
           <Route
-            path="/split/product/:splitName/:labelName"
+            path="/split/products/:splitName/:labelName"
             element={<ProductPage />}
           />
 

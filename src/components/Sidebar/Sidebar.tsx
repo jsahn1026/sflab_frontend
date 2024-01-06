@@ -64,7 +64,7 @@ const Sidebar = () => {
               const labelName = label.labelName.replace(/\//g, '-');
 
               return (
-                <SubMenu key={`submenu_${i}`} title={label.labelName}>
+                <SubMenu key={`split_submenu_${i}`} title={label.labelName}>
                   <MenuItem>
                     <NavLink to={`/split/prices/${splitName}/${labelName}`} />
                     <Typography>Prices</Typography>

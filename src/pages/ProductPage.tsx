@@ -15,39 +15,54 @@ import Filter from 'components/Filter/Filter';
 import { format } from 'date-fns';
 import { useBrandQuery } from 'hooks/useBrandQuery';
 import useItemParams from 'hooks/useItemParams';
+import useLabelNameParams from 'hooks/useLabelNameParams';
 import { useProductQuery } from 'hooks/useProductQuery';
-import { useCallback, useEffect, useState } from 'react';
+import useSplitNameParams from 'hooks/useSplitNameParams';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { DateRangeProps } from 'react-date-range';
 import { useRecoilValue } from 'recoil';
 import { SettingType, genderState, periodState } from 'store/setting';
-
-const ITEM_HEIGHT = 48;
-const ITEM_PADDING_TOP = 8;
+import { splitState } from 'store/split';
 
 const ProductPage = () => {
   const item = useItemParams();
+  const splitName = useSplitNameParams();
+  const labelName = useLabelNameParams();
 
   const [index, setIndex] = useState(0);
-  const [options, setOptions] = useState(['test']);
+  // const [options, setOptions] = useState(['test']);
   const [show, setShow] = useState(10);
 
   const brandList = useBrandQuery();
   const [brand, setBrand] = useState('');
-
+  const splits = useRecoilValue(splitState);
   const localPeriod = useRecoilValue(periodState);
   const localGenders = useRecoilValue(genderState);
 
   const [period, setPeriod] = useState<SettingType['period']>(localPeriod);
   const [genders, setGenders] = useState<string[]>(localGenders);
-  const [items, setItems] = useState<string[]>([item]);
+  const [items, setItems] = useState<string[]>(splitName ? [] : [item]);
 
   const handleChange = (event: SelectChangeEvent) => {
     setBrand(event.target.value as string);
   };
 
+  const label = useMemo(() => {
+    const label = splits
+      .find((split) => split.splitName == splitName)
+      ?.label.find((label) => label.labelName == labelName);
+
+    if (label) {
+      const { includeKeywords, excludeKeywords } = label;
+      return { includeKeywords, excludeKeywords };
+    }
+
+    return null;
+  }, [splits, splitName, labelName]);
+
   const productData = useProductQuery({
     brand,
-    keywords: items,
+    keywords: label ? items.concat(label.includeKeywords) : items,
     index,
     show,
     dates: [localPeriod.startDate, localPeriod.endDate],
@@ -90,22 +105,22 @@ const ProductPage = () => {
     setShow(Number(e.target.value));
   }, []);
 
-  const names = [
-    'Oliver Hansen',
-    'Van Henry',
-    'April Tucker',
-    'Ralph Hubbard',
-    'Omar Alexander',
-    'Carlos Abbott',
-    'Miriam Wagner',
-    'Bradley Wilkerson',
-    'Virginia Andrews',
-    'Kelly Snyder',
-  ];
+  // const names = [
+  //   'Oliver Hansen',
+  //   'Van Henry',
+  //   'April Tucker',
+  //   'Ralph Hubbard',
+  //   'Omar Alexander',
+  //   'Carlos Abbott',
+  //   'Miriam Wagner',
+  //   'Bradley Wilkerson',
+  //   'Virginia Andrews',
+  //   'Kelly Snyder',
+  // ];
 
-  const handleChangeOptions = useCallback((e: SelectChangeEvent<string[]>) => {
-    setOptions(e.target.value as string[]);
-  }, []);
+  // const handleChangeOptions = useCallback((e: SelectChangeEvent<string[]>) => {
+  //   setOptions(e.target.value as string[]);
+  // }, []);
 
   return (
     <Stack direction={'row'} spacing={5}>
