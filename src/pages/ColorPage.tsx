@@ -62,19 +62,30 @@ const ColorPage = () => {
       }
     }
 
-    const includeKeywords = splits
-      .map((split) => split.label.map(({ includeKeywords }) => includeKeywords))
-      .flat()
-      .flat();
+    if (splitName) {
+      const includeKeywords = splits
+        .map((split) =>
+          split.label.map(({ includeKeywords }) => includeKeywords)
+        )
+        .flat()
+        .flat();
 
-    const excludeKeywords = splits
-      .map((split) => split.label.map(({ excludeKeywords }) => excludeKeywords))
-      .flat()
-      .flat();
+      const excludeKeywords = splits
+        .map((split) =>
+          split.label.map(({ excludeKeywords }) => excludeKeywords)
+        )
+        .flat()
+        .flat();
+
+      return {
+        includeKeywords,
+        excludeKeywords,
+      };
+    }
 
     return {
-      includeKeywords,
-      excludeKeywords,
+      includeKeywords: [],
+      excludeKeywords: [],
     };
   }, [splits, splitName, labelName, items]);
 
@@ -87,7 +98,7 @@ const ColorPage = () => {
 
   const color = useColorQuery({
     keywords: keywords.includeKeywords.concat(items),
-    ex_keywords: keywords.excludeKeywords.concat(items),
+    ex_keywords: keywords.excludeKeywords,
     brands,
     period,
     genders,

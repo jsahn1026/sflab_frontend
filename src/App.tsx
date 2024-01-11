@@ -38,6 +38,7 @@ function App() {
           <Route path="/" element={<Home />} />
 
           <Route path="/settings" element={<Settings />} />
+
           <Route path="/prices/:item" element={<PricePage />} />
           <Route path="/fabrics/:item" element={<FabricPage />} />
           <Route path="/colors/:item" element={<ColorPage />} />

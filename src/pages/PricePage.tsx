@@ -59,19 +59,30 @@ const PricePage = () => {
       }
     }
 
-    const includeKeywords = splits
-      .map((split) => split.label.map(({ includeKeywords }) => includeKeywords))
-      .flat()
-      .flat();
+    if (splitName) {
+      const includeKeywords = splits
+        .map((split) =>
+          split.label.map(({ includeKeywords }) => includeKeywords)
+        )
+        .flat()
+        .flat();
 
-    const excludeKeywords = splits
-      .map((split) => split.label.map(({ excludeKeywords }) => excludeKeywords))
-      .flat()
-      .flat();
+      const excludeKeywords = splits
+        .map((split) =>
+          split.label.map(({ excludeKeywords }) => excludeKeywords)
+        )
+        .flat()
+        .flat();
+
+      return {
+        includeKeywords,
+        excludeKeywords,
+      };
+    }
 
     return {
-      includeKeywords,
-      excludeKeywords,
+      includeKeywords: [],
+      excludeKeywords: [],
     };
   }, [splits, splitName, labelName, items]);
 
@@ -84,7 +95,7 @@ const PricePage = () => {
 
   const prices = usePricesQuery({
     keywords: keywords.includeKeywords.concat(items),
-    ex_keywords: keywords.excludeKeywords.concat(items),
+    ex_keywords: keywords.excludeKeywords,
     brands,
     period,
     genders,
@@ -127,7 +138,6 @@ const PricePage = () => {
     ));
   }, [prices]);
 
-  console.log(items);
   return (
     <Stack direction={'row'} spacing={5}>
       <Stack direction={'column'} spacing={3}>
