@@ -13,6 +13,7 @@ import './index.scss';
 
 import Typography from '@mui/material/Typography';
 import Account from 'components/Account/Account';
+import { categories } from 'constants/categories';
 import useSidebar from 'hooks/useSidebar';
 import { useCallback, useState } from 'react';
 import { MdHome, MdSettings } from 'react-icons/md';
@@ -26,6 +27,8 @@ const Sidebar = () => {
   const splits = useRecoilValue(splitState);
 
   const [open, setOpen] = useState(items.length > 0);
+
+  const [openCategory, setOpenCategory] = useState(false);
 
   const renderMenuItems = useCallback(() => {
     return items
@@ -104,6 +107,28 @@ const Sidebar = () => {
       );
   }, [items, splits]);
 
+  const renderCategoriesItems = useCallback(() => {
+    return categories.map((category, i) => {
+      return (
+        <SubMenu key={`category_submenu_${i}`} title={category.name}>
+          {category.subcategories.map((subcategory, j) => {
+            return (
+              <SubMenu key={`category_submenu_${i}`} title={subcategory.name}>
+                {subcategory.thirdCategories.map((thirdCategory, k) => {
+                  return (
+                    <MenuItem key={`category_submenu_${k}`}>
+                      {thirdCategory.name}
+                    </MenuItem>
+                  );
+                })}
+              </SubMenu>
+            );
+          })}
+        </SubMenu>
+      );
+    });
+  }, []);
+
   return (
     <ProSidebar
       collapsed={collapsed}
@@ -134,9 +159,14 @@ const Sidebar = () => {
           <MenuItem icon={<MdSettings />}>
             Settings <Link to="/settings" />
           </MenuItem>
-          {/* <MenuItem icon={<MdProductionQuantityLimits />}>
-            Products <Link to="/products" />
-          </MenuItem> */}
+          <SubMenu
+            title={'Categories'}
+            icon={<FaList />}
+            open={openCategory}
+            onOpenChange={setOpenCategory}
+          >
+            {renderCategoriesItems()}
+          </SubMenu>
           <SubMenu
             title={'Statistics'}
             icon={<FaList />}
