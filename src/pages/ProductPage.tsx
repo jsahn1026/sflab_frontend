@@ -236,9 +236,9 @@ const ProductPage = () => {
                 justifyContent={'center'}
                 data-crawlingTargetId={product.crawlingTargetId}
               >
-                <Card sx={{ maxWidth: 345 }}>
+                <Card sx={{ maxWidth: 500 }}>
                   <CardHeader
-                    title={product.이름}
+                    title={product.상품명}
                     subheader={product.item_no}
                     // subheader={`${product.item_no} ${product.main_category} / ${
                     //   product['small_category '] ?? ''
@@ -251,51 +251,138 @@ const ProductPage = () => {
                   />
                   <CardContent>
                     <Stack spacing={2}>
-                      <Stack direction={'row'} justifyContent={'space-between'}>
-                        <Typography>메인 카테고리</Typography>
-                        <Chip label={product.main_category} />
-                      </Stack>
-                      <Stack direction={'row'} justifyContent={'space-between'}>
-                        <Typography>서브 카테고리</Typography>
-                        <Chip label={product['small_category ']} />
-                      </Stack>
-                      {product.원가 && (
-                        <Stack
-                          direction={'row'}
-                          justifyContent={'space-between'}
-                        >
-                          <Typography>원가</Typography>
-                          <Chip
-                            label={`${Number(product.원가).toLocaleString()}원`}
-                          />
+                      {product.상위범주 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>메인 카테고리</Typography>
+                          <Chip label={product.상위범주} />
                         </Stack>
                       )}
-                      {product.세일가 && (
-                        <Stack
-                          direction={'row'}
-                          justifyContent={'space-between'}
-                        >
-                          <Typography>세일가</Typography>
-                          <Chip
-                            label={`${Number(
-                              product.세일가
-                            ).toLocaleString()}원`}
-                          />
+                      {product.하위범주 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>서브 카테고리</Typography>
+                          <Chip label={product.하위범주} />
                         </Stack>
                       )}
-                      {product.date && (
-                        <Stack
-                          direction={'row'}
-                          justifyContent={'space-between'}
-                        >
-                          <Typography>날짜</Typography>
-                          <Chip label={product.date} />
+                      {product.판매가 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>판매가</Typography>
+                          <Chip label={`${Number(product.판매가).toLocaleString()}원`} />
                         </Stack>
                       )}
-
-                      <Stack direction={'row'} justifyContent={'space-between'}>
-                        <Typography fontSize={14}>{product.fabric}</Typography>
-                      </Stack>
+                      {product.상품상세정보 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>상세 정보</Typography>
+                          <Typography style={{ fontSize: '9px' }}>{product.상품상세정보}</Typography>
+                        </Stack>
+                      )}
+                      {product.소재 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>소재</Typography>
+                          <Typography>{product.소재}</Typography>
+                        </Stack>
+                      )}
+                      {product.색상 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>색상</Typography>
+                          <Typography>{product.색상}</Typography>
+                        </Stack>
+                      )}
+                      {product.사이즈 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>사이즈</Typography>
+                          <Typography>{product.사이즈}</Typography>
+                        </Stack>
+                      )}
+                      {product.제조국 && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>제조국</Typography>
+                          <Typography style={{ fontSize: '9px' }}>{product.제조국}</Typography>
+                        </Stack>
+                      )}
+                      {product.main_category && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>main</Typography>
+                          <Typography>{product.main_category}</Typography>
+                        </Stack>
+                      )}
+                      {product.mid_category && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>mid</Typography>
+                          <Typography>{product.mid_category}</Typography>
+                        </Stack>
+                      )}
+                      {product.small_category && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>small</Typography>
+                          <Typography>{product.small_category}</Typography>
+                        </Stack>
+                      )}
+                      {product.collar && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>collar</Typography>
+                          <Typography>{product.collar}</Typography>
+                        </Stack>
+                      )}
+                      {product.shape && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>shape</Typography>
+                          <Typography>{product.shape}</Typography>
+                        </Stack>
+                      )}
+                      {product.length && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>length</Typography>
+                          <Typography>{product.length}</Typography>
+                        </Stack>
+                      )}
+                      {product.sleeve_length && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>sleeve length</Typography>
+                          <Typography>{product.sleeve_length}</Typography>
+                        </Stack>
+                      )}
+                      {product.texture && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>texture</Typography>
+                          <Typography>{product.texture}</Typography>
+                        </Stack>
+                      )}
+                      {product.color && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>color</Typography>
+                          <Typography>{product.color}</Typography>
+                        </Stack>
+                      )}
+                      {product.print && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>print</Typography>
+                          <Typography>{product.print}</Typography>
+                        </Stack>
+                      )}
+                      {product.fiber && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>fiber</Typography>
+                          <Typography>{product.fiber}</Typography>
+                        </Stack>
+                      )}
+                      {product.fabric && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>fabric</Typography>
+                          <Typography>{product.fabric}</Typography>
+                        </Stack>
+                      )}
+                      {product.woven && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>woven</Typography>
+                          <Typography >{product.woven}</Typography>
+                        </Stack>
+                      )}
+                      {product.neckline && (
+                        <Stack direction={'row'} justifyContent={'space-between'}>
+                          <Typography>neckline</Typography>
+                          <Typography>{product.neckline}</Typography>
+                        </Stack>
+                      )}
                     </Stack>
                   </CardContent>
                 </Card>
