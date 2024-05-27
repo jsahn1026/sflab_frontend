@@ -5,6 +5,7 @@ import Filter from 'components/Filter/Filter';
 import TransferList from 'components/TransferList/TransferList';
 import { format } from 'date-fns';
 import Highcharts from 'highcharts';
+import Drilldown from 'highcharts/modules/drilldown';
 import HighchartsReact from 'highcharts-react-official';
 import { useBrandQuery } from 'hooks/useBrandQuery';
 import { useFabricQuery } from 'hooks/useFabricQuery';
@@ -21,7 +22,7 @@ import {
   periodState,
 } from 'store/setting';
 import { splitState } from 'store/split';
-
+Drilldown(Highcharts);
 const FabricPage = () => {
   const item = useItemParams();
   const splitName = useSplitNameParams();

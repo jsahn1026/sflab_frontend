@@ -25,6 +25,12 @@ import { splitState } from 'store/split';
 
 require('highcharts/highcharts-more.js')(Highcharts);
 
+Highcharts.setOptions({
+  lang: {
+    thousandsSep: ',',
+  },
+});
+
 const PricePage = () => {
   const item = useItemParams();
   const splitName = useSplitNameParams();
