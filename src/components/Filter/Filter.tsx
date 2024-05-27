@@ -1,8 +1,7 @@
 import Stack from '@mui/material/Stack';
 
-import Typography from '@mui/material/Typography';
 import Calendar from 'components/Calendar/Calendar';
-import TransferList from 'components/TransferList/TransferList';
+import SelectOption from 'components/SelectOption/SelectOption';
 import { useGenderQuery } from 'hooks/useGenderQuery';
 import { useItemQuery } from 'hooks/useItemQuery';
 import { useMemo } from 'react';
@@ -33,12 +32,15 @@ const Filter = (props: FilterProps) => {
   );
 
   return (
-    <Stack spacing={5} minWidth={500} alignItems={'flex-start'}>
-      <Calendar
-        period={props.period}
-        handleOnRangeChange={props.handleOnRangeChange}
+    <Stack spacing={5} minWidth={500}>
+      <SelectOption
+        options={selectableGender}
+        setState={props.handleChangeGender}
+        placeholder="Select Genders"
+        value={props.genders}
+        title="Select Genders"
       />
-      <Stack spacing={1}>
+      {/* <Stack spacing={1}>
         <Typography fontSize={15} fontWeight={'bold'}>
           Select Gender
         </Typography>
@@ -47,8 +49,8 @@ const Filter = (props: FilterProps) => {
           right={props.genders}
           handleChangeRight={props.handleChangeGender}
         />
-      </Stack>
-      <Stack spacing={1}>
+      </Stack> */}
+      {/* <Stack spacing={1}>
         <Typography fontSize={15} fontWeight={'bold'}>
           Select Items
         </Typography>
@@ -56,6 +58,20 @@ const Filter = (props: FilterProps) => {
           left={selectableItems}
           right={props.items}
           handleChangeRight={props.handleChangeItems}
+        />
+      </Stack> */}
+
+      <SelectOption
+        options={selectableItems}
+        setState={props.handleChangeItems}
+        placeholder="Select Items"
+        value={props.items}
+        title="Select Items"
+      />
+      <Stack alignItems={'flex-start'}>
+        <Calendar
+          period={props.period}
+          handleOnRangeChange={props.handleOnRangeChange}
         />
       </Stack>
     </Stack>

@@ -152,59 +152,56 @@ const ProductPage = () => {
   // }, []);
 
   return (
-    <Stack direction={'row'} spacing={5}>
-      <Stack direction={'column'} spacing={3}>
-        <Stack spacing={2}>
-          <Typography fontSize={15} fontWeight={'bold'}>
-            Select Brand
-          </Typography>
-          <FormControl>
-            <InputLabel id="brand">Brand</InputLabel>
-            <Select
-              labelId="brand"
-              value={brand}
-              label="Brand"
-              onChange={handleChange}
-            >
-              {brandList.map((brand) => (
-                <MenuItem value={brand}>{brand}</MenuItem>
-              ))}
-            </Select>
-          </FormControl>
-        </Stack>
-        <Filter
-          period={period}
-          handleOnRangeChange={handleOnRangeChange}
-          genders={genders}
-          handleChangeGender={handleChangeGender}
-          items={items}
-          handleChangeItems={handleChangeItems}
-        />
+    <Stack direction={'column'} spacing={5}>
+      <Stack spacing={2}>
+        <Typography fontSize={15} fontWeight={'bold'}>
+          Select Brand
+        </Typography>
+        <FormControl>
+          <InputLabel id="brand">Brand</InputLabel>
+          <Select
+            labelId="brand"
+            value={brand}
+            label="Brand"
+            onChange={handleChange}
+          >
+            {brandList.map((brand) => (
+              <MenuItem value={brand}>{brand}</MenuItem>
+            ))}
+          </Select>
+        </FormControl>
       </Stack>
+      <Filter
+        period={period}
+        handleOnRangeChange={handleOnRangeChange}
+        genders={genders}
+        handleChangeGender={handleChangeGender}
+        items={items}
+        handleChangeItems={handleChangeItems}
+      />
 
-      <Stack spacing={1} flex={1}>
-        <Stack spacing={2} direction={'row'}>
-          <Pagination
-            count={productData?.['#pages']}
-            variant="outlined"
-            shape="rounded"
-            onChange={handleChangePage}
-          />
-          <FormControl>
-            <InputLabel id="itemCount">표시 개수</InputLabel>
-            <Select
-              labelId="itemCount"
-              value={show}
-              label="표시 개수"
-              onChange={handleChangeItemCount}
-            >
-              <MenuItem value={10}>10개</MenuItem>
-              <MenuItem value={20}>20개</MenuItem>
-              <MenuItem value={40}>40개</MenuItem>
-              <MenuItem value={60}>60개</MenuItem>
-            </Select>
-          </FormControl>
-          {/* <FormControl>
+      <Stack spacing={2} direction={'row'}>
+        <Pagination
+          count={productData?.['#pages']}
+          variant="outlined"
+          shape="rounded"
+          onChange={handleChangePage}
+        />
+        <FormControl>
+          <InputLabel id="itemCount">표시 개수</InputLabel>
+          <Select
+            labelId="itemCount"
+            value={show}
+            label="표시 개수"
+            onChange={handleChangeItemCount}
+          >
+            <MenuItem value={10}>10개</MenuItem>
+            <MenuItem value={20}>20개</MenuItem>
+            <MenuItem value={40}>40개</MenuItem>
+            <MenuItem value={60}>60개</MenuItem>
+          </Select>
+        </FormControl>
+        {/* <FormControl>
             <InputLabel id="options">보기 옵션 선택</InputLabel>
             <Select
               labelId="options"
@@ -384,13 +381,13 @@ const ProductPage = () => {
                         </Stack>
                       )}
                     </Stack>
-                  </CardContent>
-                </Card>
-              </Grid>
-            );
-          })}
-        </Grid>
-      </Stack>
+                  </Stack>
+                </CardContent>
+              </Card>
+            </Grid>
+          );
+        })}
+      </Grid>
     </Stack>
   );
 };

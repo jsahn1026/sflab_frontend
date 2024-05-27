@@ -1,8 +1,7 @@
 // import Switch from 'react-switch';
 import Stack from '@mui/material/Stack';
-import Typography from '@mui/material/Typography';
 import Filter from 'components/Filter/Filter';
-import TransferList from 'components/TransferList/TransferList';
+import SelectOption from 'components/SelectOption/SelectOption';
 import { format } from 'date-fns';
 import Highcharts from 'highcharts';
 import Drilldown from 'highcharts/modules/drilldown';
@@ -137,25 +136,30 @@ const FabricPage = () => {
   }, [fabric]);
 
   return (
-    <Stack direction={'row'} spacing={5}>
-      <Stack direction={'column'} spacing={3}>
-        <Typography fontSize={15} fontWeight={'bold'}>
+    <Stack direction={'column'} spacing={5}>
+      {/* <Typography fontSize={15} fontWeight={'bold'}>
           Select Brands
         </Typography>
         <TransferList
           left={selectableBrands}
           right={brands}
           handleChangeRight={handleChangeBrands}
-        />
-        <Filter
-          period={period}
-          handleOnRangeChange={handleOnRangeChange}
-          genders={genders}
-          handleChangeGender={handleChangeGender}
-          items={items}
-          handleChangeItems={handleChangeItems}
-        />
-      </Stack>
+        /> */}
+      <SelectOption
+        options={selectableBrands}
+        setState={setBrands}
+        placeholder="Select Brands"
+        value={brands}
+        title="Select Brands"
+      />
+      <Filter
+        period={period}
+        handleOnRangeChange={handleOnRangeChange}
+        genders={genders}
+        handleChangeGender={handleChangeGender}
+        items={items}
+        handleChangeItems={handleChangeItems}
+      />
       <Stack flex={1} spacing={5}>
         {renderChart()}
       </Stack>
