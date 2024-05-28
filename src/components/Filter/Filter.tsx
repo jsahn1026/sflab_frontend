@@ -32,14 +32,14 @@ const Filter = (props: FilterProps) => {
   );
 
   return (
-    <Stack spacing={5} minWidth={500}>
-      <SelectOption
+    <Stack spacing={2} minWidth={500}>
+      {/* <SelectOption
         options={selectableGender}
         setState={props.handleChangeGender}
         placeholder="Select Genders"
         value={props.genders}
         title="Select Genders"
-      />
+      /> */}
       {/* <Stack spacing={1}>
         <Typography fontSize={15} fontWeight={'bold'}>
           Select Gender

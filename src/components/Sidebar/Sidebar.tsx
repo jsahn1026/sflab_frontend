@@ -107,27 +107,70 @@ const Sidebar = () => {
         ))
       );
   }, [items, splits]);
-
+  const getNavLink = (name: string,third:boolean) => {
+    const [mainCategory, subCategory] = name.split(' ');
+    let path = '';
+    let c = third ? "small_category" : "mid_category";
+    switch (subCategory) {
+      case 'Ratios':
+        path = `/stats/${mainCategory}/${c}`;
+        break;
+      case 'Lengths':
+        path = `/stats/${mainCategory}/length`;
+        break;
+      case 'Textures':
+        path = `/stats/${mainCategory}/texture`;
+        break;
+      case 'Materials':
+        path = `/fabrics/${mainCategory}`;
+        break;
+      case 'Prices':
+        path = `/prices/${mainCategory}`;
+        break;
+      // 필요에 따라 더 많은 case를 추가할 수 있습니다.
+      default:
+        path = '';
+    }
+  
+    return path;
+  };
   const renderCategoriesItems = useCallback(() => {
-    return categories.map((category, i) => {
-      return (
-        <SubMenu key={`category_submenu_${i}`} title={category.name}>
-          {category.subcategories.map((subcategory, j) => {
+    return categories.map((category, i) => (
+      <SubMenu key={`category_submenu_${i}`} title={category.name}>
+        {category.subcategories.map((subcategory, j) => {
+          if (subcategory.thirdCategories.length === 0) {
+            const subcategoryNavLink = getNavLink(subcategory.name,false);
             return (
-              <SubMenu key={`category_submenu_${i}`} title={subcategory.name}>
+              <MenuItem key={`subcategory_menuitem_${j}`}>
+                {subcategoryNavLink ? (
+                  <NavLink to={subcategoryNavLink}>{subcategory.name}</NavLink>
+                ) : (
+                  subcategory.name
+                )}
+              </MenuItem>
+            );
+          } else {
+            
+            return (
+              <SubMenu key={`subcategory_submenu_${j}`} title={subcategory.name}>
                 {subcategory.thirdCategories.map((thirdCategory, k) => {
+                  const thirdCategoryNavLink = getNavLink(thirdCategory.name,true);
                   return (
-                    <MenuItem key={`category_submenu_${k}`}>
-                      {thirdCategory.name}
+                    <MenuItem key={`thirdcategory_menuitem_${k}`}>
+                      {thirdCategoryNavLink ? (
+                        <NavLink to={thirdCategoryNavLink}>{thirdCategory.name}</NavLink>
+                      ) : (
+                        thirdCategory.name
+                      )}
                     </MenuItem>
                   );
                 })}
               </SubMenu>
             );
-          })}
-        </SubMenu>
-      );
-    });
+          }
+        })}
+      </SubMenu>
+    ));
   }, []);
 
   return (
@@ -167,6 +210,17 @@ const Sidebar = () => {
             onOpenChange={setOpenCategory}
           >
             {renderCategoriesItems()}
+          </SubMenu>
+          <SubMenu
+            title={'Price Statistics'}
+            icon={<FaList />}
+          >
+            <MenuItem>
+              <NavLink to="/average_prices">{"Average Prices"}</NavLink>
+            </MenuItem>
+            <MenuItem>
+              <NavLink to="/price_distributions">{"Price Distributions"}</NavLink>
+            </MenuItem>
           </SubMenu>
           <SubMenu
             title={'Statistics'}

@@ -6,6 +6,8 @@ export type GetFabricParams = {
   dates: string[];
   gender: string[];
   ex_keywords: string[];
+  SKU: boolean;
+  newitems: boolean;
 };
 
 export default async function getFabric(params: GetFabricParams) {

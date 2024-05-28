@@ -1,0 +1,20 @@
+.custom-calendar {
+    position: relative;
+  }
+  .rdrCalendarWrapper {
+    transform: scale(0.8); /* Adjust the scale as needed */
+  }
+  .custom-calendar button {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+    background-color: #f7f7f7;
+    color: black; /* 텍스트 색상을 검은색으로 변경 */
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+  }
+  
+  .custom-calendar button:hover {
+    background-color: #0056b3;
+    color: white; /* 호버 시 텍스트 색상을 흰색으로 변경 */
+  }

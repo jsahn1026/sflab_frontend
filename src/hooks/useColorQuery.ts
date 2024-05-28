@@ -9,6 +9,8 @@ interface ColorQueryParams {
   brands: string[];
   period: SettingType['period'];
   genders: string[];
+  SKU: boolean;
+  newitems: boolean;
 }
 
 export const useColorQuery = ({
@@ -17,6 +19,8 @@ export const useColorQuery = ({
   brands,
   period,
   genders,
+  SKU,
+  newitems,
 }: ColorQueryParams) => {
   const params = useMemo<GetColorParams>(
     () => ({
@@ -25,6 +29,8 @@ export const useColorQuery = ({
       ex_keywords,
       dates: [period.startDate, period.endDate],
       gender: genders,
+      SKU,
+      newitems,
     }),
     [keywords, brands, period, genders, ex_keywords]
   );

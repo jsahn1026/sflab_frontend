@@ -1,11 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
-import getFabric, { GetFabricParams } from 'apis/getFabric';
+import getStats, { GetStatsParams } from 'apis/getStats';
 import { useMemo } from 'react';
 import { SettingType } from 'store/setting';
 
-interface FabricQueryParams {
+interface StatQueryParams {
   keywords: string[];
   ex_keywords: string[];
+  stats_name: string;
+  drilldown_name: string
   brands: string[];
   period: SettingType['period'];
   genders: string[];
@@ -13,19 +15,23 @@ interface FabricQueryParams {
   newitems: boolean;
 }
 
-export const useFabricQuery = ({
+export const useStatsQuery = ({
   keywords,
   ex_keywords,
+  stats_name,
+  drilldown_name,
   brands,
   period,
   genders,
   SKU,
   newitems,
-}: FabricQueryParams) => {
-  const params = useMemo<GetFabricParams>(
+}: StatQueryParams) => {
+  const params = useMemo<GetStatsParams>(
     () => ({
       brands,
       keywords,
+      stats_name,
+      drilldown_name,
       ex_keywords,
       dates: [period.startDate, period.endDate],
       gender: genders,
@@ -35,7 +41,7 @@ export const useFabricQuery = ({
     [keywords, brands, period, genders]
   );
 
-  const { data } = useQuery(['fabric', params], () => getFabric(params));
+  const { data } = useQuery(['stats', params], () => getStats(params));
   if (typeof(data) == "object"){
     var data_array = data as Array<any>;
     Object.keys(data_array[0]?.chart.events).forEach(event => {

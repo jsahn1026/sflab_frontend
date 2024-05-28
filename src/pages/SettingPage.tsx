@@ -12,10 +12,13 @@ import { DateRangeProps } from 'react-date-range';
 
 import { useRecoilState } from 'recoil';
 import {
+  SettingType,
   brandsState,
   genderState,
-  itemState,
   periodState,
+  SKUState,
+  newItemState,
+  itemState,
 } from 'store/setting';
 
 const Settings = () => {

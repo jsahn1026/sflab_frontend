@@ -10,6 +10,9 @@ export type SettingType = {
     startDate: string;
     endDate: string;
   };
+  SKU: boolean;
+  newitems: boolean;
+  drilldown: string;
 };
 
 export const settingState = atom<SettingType>({
@@ -22,6 +25,9 @@ export const settingState = atom<SettingType>({
       startDate: format(new Date(), 'yyyy-MM-dd'),
       endDate: format(new Date(), 'yyyy-MM-dd'),
     },
+    SKU: false, // Default value for SKU
+    newitems: false, // Default value for newitems
+    drilldown: "small_category"
   },
   effects: [localStorageEffect('setting')],
 });
@@ -66,6 +72,39 @@ export const periodState = selector<SettingType['period']>({
     const setting = get(settingState);
     if (!(period instanceof DefaultValue)) {
       set(settingState, { ...setting, period });
+    }
+  },
+});
+
+export const SKUState = selector<SettingType['SKU']>({
+  key: 'SKUState',
+  get: ({ get }) => get(settingState).SKU,
+  set: ({ set, get }, SKU) => {
+    const setting = get(settingState);
+    if (!(SKU instanceof DefaultValue)) {
+      set(settingState, { ...setting, SKU });
+    }
+  },
+});
+
+export const newItemState = selector<SettingType['newitems']>({
+  key: 'newItemState',
+  get: ({ get }) => get(settingState).newitems,
+  set: ({ set, get }, newitems) => {
+    const setting = get(settingState);
+    if (!(newitems instanceof DefaultValue)) {
+      set(settingState, { ...setting, newitems });
+    }
+  },
+});
+
+export const drillDownState = selector<SettingType['drilldown']>({
+  key: 'drillDownState',
+  get: ({ get }) => get(settingState).drilldown,
+  set: ({ set, get }, drilldown) => {
+    const setting = get(settingState);
+    if (!(drilldown instanceof DefaultValue)) {
+      set(settingState, { ...setting, drilldown });
     }
   },
 });

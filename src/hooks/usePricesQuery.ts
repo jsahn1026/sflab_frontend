@@ -9,6 +9,8 @@ interface PriceQueryParams {
   brands: string[];
   period: SettingType['period'];
   genders: string[];
+  SKU: boolean;
+  newitems: boolean;
 }
 
 export const usePricesQuery = ({
@@ -17,6 +19,8 @@ export const usePricesQuery = ({
   brands,
   period,
   genders,
+  SKU,
+  newitems,
 }: PriceQueryParams) => {
   const params = useMemo<GetPricesParams>(
     () => ({
@@ -25,6 +29,8 @@ export const usePricesQuery = ({
       ex_keywords,
       dates: [period.startDate, period.endDate],
       gender: genders,
+      SKU,
+      newitems,
     }),
     [keywords, brands, period, genders, ex_keywords]
   );

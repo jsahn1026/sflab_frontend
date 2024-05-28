@@ -6,6 +6,8 @@ export type GetColorParams = {
   ex_keywords: string[];
   dates: string[];
   gender: string[];
+  SKU: boolean;
+  newitems: boolean;
 };
 
 export default async function getColor(params: GetColorParams) {

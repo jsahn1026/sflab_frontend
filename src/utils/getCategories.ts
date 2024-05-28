@@ -42,18 +42,18 @@ function readCategoriesFromExcel(filePath: string): CategoryData {
     }
   });
 
-  // 3차 카테고리 데이터 추가
-  data.forEach((row: any[]) => {
-    row.forEach((cell: any, colIndex: number) => {
-      const categoryName = data[0][colIndex];
-      if (categoryName && cell && categoryData[categoryName][cell]) {
-        if (colIndex + 1 < row.length && row[colIndex + 1]) {
-          categoryData[categoryName][cell].push(row[colIndex + 1]);
-        }
-      }
-    });
-  });
-
+  // // 3차 카테고리 데이터 추가
+  // data.forEach((row: any[]) => {
+  //   row.forEach((cell: any, colIndex: number) => {
+  //     const categoryName = data[0][colIndex];
+  //     if (categoryName && cell && categoryData[categoryName][cell]) {
+  //       if (colIndex + 1 < row.length && row[colIndex + 1]) {
+  //         categoryData[categoryName][cell].push(row[colIndex + 1]);
+  //       }
+  //     }
+  //   });
+  // });
+  console.log(categoryData)
   return categoryData;
 }
 

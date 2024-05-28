@@ -33,7 +33,7 @@ const SelectOption = ({
 
   return (
     <div>
-      <Typography fontSize={30} fontWeight={'bold'}>
+      <Typography fontSize={15} fontWeight={'bold'}>
         {title}
       </Typography>
       <Select

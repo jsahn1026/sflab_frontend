@@ -10,6 +10,7 @@ import { loginState } from 'store/auth';
 import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 import FabricPage from './pages/FabricPage';
+import StatsPage from './pages/StatsPage';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
@@ -43,6 +44,7 @@ function App() {
           <Route path="/fabrics/:item" element={<FabricPage />} />
           <Route path="/colors/:item" element={<ColorPage />} />
           <Route path="/products/:item" element={<ProductPage />} />
+          <Route path="/stats/:item/:stats_name" element={<StatsPage />} />
 
           <Route path="/split/:splitName/all" element={<ProductPage />} />
           <Route path="/split/:splitName/prices" element={<PricePage />} />

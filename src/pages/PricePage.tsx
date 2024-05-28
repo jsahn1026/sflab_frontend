@@ -1,8 +1,9 @@
 // import Switch from 'react-switch';
 import Stack from '@mui/material/Stack';
-
 import Filter from 'components/Filter/Filter';
 import SelectOption from 'components/SelectOption/SelectOption';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 import { format } from 'date-fns';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
@@ -19,6 +20,9 @@ import {
   brandsState,
   genderState,
   periodState,
+  SKUState,
+  newItemState,
+  itemState,
 } from 'store/setting';
 import { splitState } from 'store/split';
 
@@ -41,11 +45,15 @@ const PricePage = () => {
   const localPeriod = useRecoilValue(periodState);
   const localGenders = useRecoilValue(genderState);
   const splits = useRecoilValue(splitState);
+  const localSKU = useRecoilValue(SKUState);
+  const localNewItems = useRecoilValue(newItemState);
 
   const [brands, setBrands] = useState<string[]>(localBrand);
   const [period, setPeriod] = useState<SettingType['period']>(localPeriod);
   const [genders, setGenders] = useState<string[]>(localGenders);
   const [items, setItems] = useState<string[]>(splitName ? [] : [item]);
+  const [SKU, setSKU] = useState<boolean>(localSKU);
+  const [newitems, setNewItems] = useState<boolean>(localNewItems);
 
   const selectableBrands = useMemo(
     () => brandList.filter((brand) => !brands.includes(brand)),
@@ -104,6 +112,8 @@ const PricePage = () => {
     brands,
     period,
     genders,
+    SKU,
+    newitems,
   });
 
   const handleChangeBrands = useCallback(
@@ -168,6 +178,16 @@ const PricePage = () => {
         items={items}
         handleChangeItems={handleChangeItems}
       />
+      <Stack direction={'row'} spacing={2}>
+        <FormControlLabel
+          control={<Checkbox checked={SKU} onChange={() => setSKU(!SKU)} />}
+          label="SKU"
+        />
+        <FormControlLabel
+          control={<Checkbox checked={newitems} onChange={() => setNewItems(!newitems)} />}
+          label="New Items"
+        />
+      </Stack>
       <Stack flex={1} spacing={5}>
         {renderChart()}
       </Stack>
