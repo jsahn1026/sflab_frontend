@@ -30,6 +30,13 @@ export const useFabricQuery = ({
   );
 
   const { data } = useQuery(['fabric', params], () => getFabric(params));
-
+  if (typeof(data) == "object"){
+    var data_array = data as Array<any>;
+    Object.keys(data_array[0]?.chart.events).forEach(event => {
+      var f: any;
+      eval("f = " + data_array[0].chart.events[event]);
+      data_array[0].chart.events[event] = f;
+    });
+  }
   return useMemo(() => data ?? [], [data]);
 };

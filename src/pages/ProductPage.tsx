@@ -381,7 +381,6 @@ const ProductPage = () => {
                         </Stack>
                       )}
                     </Stack>
-                  </Stack>
                 </CardContent>
               </Card>
             </Grid>
