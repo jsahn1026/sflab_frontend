@@ -11,6 +11,8 @@ import Footer from './components/Footer/Footer';
 import Sidebar from './components/Sidebar/Sidebar';
 import FabricPage from './pages/FabricPage';
 import StatsPage from './pages/StatsPage';
+import AveragePricePage from './pages/AveragePricePage';
+import PriceDistPage from './pages/PriceDistPage';
 import Home from './pages/Home';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
@@ -68,7 +70,8 @@ function App() {
             path="/split/products/:splitName/:labelName"
             element={<ProductPage />}
           />
-
+          <Route path="/price_distributions" element={<PriceDistPage />}/>
+          <Route path="/average_prices" element={<AveragePricePage />}/>
           <Route path="/login" element={<Login />} />
         </Routes>
         <Footer />

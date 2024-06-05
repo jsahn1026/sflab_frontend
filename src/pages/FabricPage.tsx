@@ -8,6 +8,8 @@ import { format } from 'date-fns';
 import Highcharts from 'highcharts';
 import Drilldown from 'highcharts/modules/drilldown';
 import HighchartsReact from 'highcharts-react-official';
+import exporting from 'highcharts/modules/exporting';
+import exportData from 'highcharts/modules/export-data';
 import { useBrandQuery } from 'hooks/useBrandQuery';
 import { useFabricQuery } from 'hooks/useFabricQuery';
 import useItemParams from 'hooks/useItemParams';
@@ -26,7 +28,8 @@ import {
 } from 'store/setting';
 import { splitState } from 'store/split';
 Drilldown(Highcharts);
-
+exporting(Highcharts);
+exportData(Highcharts);
 const FabricPage = () => {
   const item = useItemParams();
   const splitName = useSplitNameParams();

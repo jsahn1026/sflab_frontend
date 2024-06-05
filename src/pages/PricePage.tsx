@@ -7,6 +7,8 @@ import FormControlLabel from '@mui/material/FormControlLabel';
 import { format } from 'date-fns';
 import Highcharts from 'highcharts';
 import HighchartsReact from 'highcharts-react-official';
+import exporting from 'highcharts/modules/exporting';
+import exportData from 'highcharts/modules/export-data';
 import { useBrandQuery } from 'hooks/useBrandQuery';
 import useItemParams from 'hooks/useItemParams';
 import useLabelNameParams from 'hooks/useLabelNameParams';
@@ -25,7 +27,8 @@ import {
   itemState,
 } from 'store/setting';
 import { splitState } from 'store/split';
-
+exporting(Highcharts);
+exportData(Highcharts);
 require('highcharts/highcharts-more.js')(Highcharts);
 
 Highcharts.setOptions({

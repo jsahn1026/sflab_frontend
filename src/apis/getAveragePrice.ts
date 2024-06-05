@@ -1,6 +1,6 @@
 import axiosInstance from './axios';
 
-export type GetStatsParams = {
+export type GetAveragePriceParams = {
   brands: string[];
   keywords: string[];
   stats_name: string;
@@ -12,8 +12,8 @@ export type GetStatsParams = {
   newitems: boolean;
 };
 
-export default async function getStats(params: GetStatsParams) {
-  const response = await axiosInstance.post<[]>('/v1/get_stats', params);
+export default async function getAveragePrice(params: GetAveragePriceParams) {
+  const response = await axiosInstance.post<[]>('/v1/average_price', params);
 
   return response.data;
 }

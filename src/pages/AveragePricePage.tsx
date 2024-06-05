@@ -9,10 +9,8 @@ import { format } from 'date-fns';
 import Highcharts from 'highcharts';
 import Drilldown from 'highcharts/modules/drilldown';
 import HighchartsReact from 'highcharts-react-official';
-import exporting from 'highcharts/modules/exporting';
-import exportData from 'highcharts/modules/export-data';
 import { useBrandQuery } from 'hooks/useBrandQuery';
-import { useStatsQuery } from 'hooks/useStatsQuery';
+import { useAveragePriceQuery } from 'hooks/useAveragePriceQuery';
 import useItemParams from 'hooks/useItemParams';
 import useLabelNameParams from 'hooks/useLabelNameParams';
 import useSplitNameParams from 'hooks/useSplitNameParams';
@@ -30,9 +28,8 @@ import {
 } from 'store/setting';
 import { splitState } from 'store/split';
 Drilldown(Highcharts);
-exporting(Highcharts);
-exportData(Highcharts);
-const StatsPage = () => {
+
+const AveragePricePage = () => {
   const item = useItemParams();
   const splitName = useSplitNameParams();
   const labelName = useLabelNameParams();
@@ -108,7 +105,7 @@ const StatsPage = () => {
     setPeriod(localPeriod);
   }, [item]);
 
-  const stats = useStatsQuery({
+  const stats = useAveragePriceQuery({
     keywords: keywords.includeKeywords.concat(items),
     ex_keywords: keywords.excludeKeywords,
     stats_name,
@@ -222,4 +219,4 @@ const StatsPage = () => {
   );
 };
 
-export default StatsPage;
+export default AveragePricePage ;
